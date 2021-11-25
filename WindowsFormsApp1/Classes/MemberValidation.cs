@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Linq;
+﻿using System.Data;
 using System.Text;
-using System.Threading.Tasks;
 
-namespace WindowsFormsApp1
+namespace WindowsFormsApp1.Classes
 {
     public static class MemberValidation
     {
@@ -13,26 +9,26 @@ namespace WindowsFormsApp1
         {
             var memberRow = new BadMemberRow {Id = senderRow.Field<int>("id")};
 
-            var sb = new StringBuilder();
+            var builder = new StringBuilder();
             if (string.IsNullOrWhiteSpace(senderRow.Field<string>("FirstName")))
             {
-                sb.AppendLine("First name required");
+                builder.AppendLine("First name required");
                 
             }
             if (string.IsNullOrWhiteSpace(senderRow.Field<string>("LastName")))
             {
-                sb.AppendLine("Last name required");
+                builder.AppendLine("Last name required");
             }
 
             if (senderRow.IsNull("PIN"))
             {
-                sb.AppendLine("Must have a PIN");
+                builder.AppendLine("Must have a PIN");
             }else if (senderRow.Field<string>("PIN").Length != 4)
             {
-                sb.AppendLine("PIN must contain four digits");
+                builder.AppendLine("PIN must contain four digits");
             }
 
-            memberRow.Description = sb.ToString();
+            memberRow.Description = builder.ToString();
 
             return memberRow;
         }

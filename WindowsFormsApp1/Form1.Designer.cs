@@ -33,7 +33,6 @@
             this.bindingNavigator1 = new System.Windows.Forms.BindingNavigator(this.components);
             this.bindingNavigatorAddNewItem = new System.Windows.Forms.ToolStripButton();
             this.bindingNavigatorCountItem = new System.Windows.Forms.ToolStripLabel();
-            this.bindingNavigatorDeleteItem = new System.Windows.Forms.ToolStripButton();
             this.bindingNavigatorMoveFirstItem = new System.Windows.Forms.ToolStripButton();
             this.bindingNavigatorMovePreviousItem = new System.Windows.Forms.ToolStripButton();
             this.bindingNavigatorSeparator = new System.Windows.Forms.ToolStripSeparator();
@@ -42,14 +41,16 @@
             this.bindingNavigatorMoveNextItem = new System.Windows.Forms.ToolStripButton();
             this.bindingNavigatorMoveLastItem = new System.Windows.Forms.ToolStripButton();
             this.bindingNavigatorSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.bindingNavigatorDeleteItem = new System.Windows.Forms.ToolStripButton();
             this.toolStripButtonSave = new System.Windows.Forms.ToolStripButton();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.DeletedButton = new System.Windows.Forms.Button();
+            this.mockedAddRowButton = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.idTextBox = new System.Windows.Forms.TextBox();
             this.getChangesButton = new System.Windows.Forms.Button();
             this.closeButton = new System.Windows.Forms.Button();
             this.membersGrid = new System.Windows.Forms.DataGridView();
-            this.mockedAddRowButton = new System.Windows.Forms.Button();
             this.IdColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.StatusColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.FirstNameColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -59,7 +60,6 @@
             this.StateColumn = new System.Windows.Forms.DataGridViewComboBoxColumn();
             this.PostalCodeColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.PINColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.DeletedButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.bindingNavigator1)).BeginInit();
             this.bindingNavigator1.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -111,16 +111,6 @@
             this.bindingNavigatorCountItem.Text = "of {0}";
             this.bindingNavigatorCountItem.ToolTipText = "Total number of items";
             // 
-            // bindingNavigatorDeleteItem
-            // 
-            this.bindingNavigatorDeleteItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.bindingNavigatorDeleteItem.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorDeleteItem.Image")));
-            this.bindingNavigatorDeleteItem.Name = "bindingNavigatorDeleteItem";
-            this.bindingNavigatorDeleteItem.RightToLeftAutoMirrorImage = true;
-            this.bindingNavigatorDeleteItem.Size = new System.Drawing.Size(23, 22);
-            this.bindingNavigatorDeleteItem.Text = "Delete";
-            this.bindingNavigatorDeleteItem.Click += new System.EventHandler(this.bindingNavigatorDeleteItem_Click);
-            // 
             // bindingNavigatorMoveFirstItem
             // 
             this.bindingNavigatorMoveFirstItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
@@ -148,6 +138,7 @@
             // 
             this.bindingNavigatorPositionItem.AccessibleName = "Position";
             this.bindingNavigatorPositionItem.AutoSize = false;
+            this.bindingNavigatorPositionItem.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.bindingNavigatorPositionItem.Name = "bindingNavigatorPositionItem";
             this.bindingNavigatorPositionItem.Size = new System.Drawing.Size(50, 23);
             this.bindingNavigatorPositionItem.Text = "0";
@@ -181,6 +172,16 @@
             this.bindingNavigatorSeparator2.Name = "bindingNavigatorSeparator2";
             this.bindingNavigatorSeparator2.Size = new System.Drawing.Size(6, 25);
             // 
+            // bindingNavigatorDeleteItem
+            // 
+            this.bindingNavigatorDeleteItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.bindingNavigatorDeleteItem.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorDeleteItem.Image")));
+            this.bindingNavigatorDeleteItem.Name = "bindingNavigatorDeleteItem";
+            this.bindingNavigatorDeleteItem.RightToLeftAutoMirrorImage = true;
+            this.bindingNavigatorDeleteItem.Size = new System.Drawing.Size(23, 22);
+            this.bindingNavigatorDeleteItem.Text = "Delete";
+            this.bindingNavigatorDeleteItem.Click += new System.EventHandler(this.bindingNavigatorDeleteItem_Click);
+            // 
             // toolStripButtonSave
             // 
             this.toolStripButtonSave.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
@@ -203,6 +204,25 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(800, 74);
             this.panel1.TabIndex = 1;
+            // 
+            // DeletedButton
+            // 
+            this.DeletedButton.Location = new System.Drawing.Point(158, 6);
+            this.DeletedButton.Name = "DeletedButton";
+            this.DeletedButton.Size = new System.Drawing.Size(140, 23);
+            this.DeletedButton.TabIndex = 7;
+            this.DeletedButton.Text = "Get Deleted";
+            this.DeletedButton.UseVisualStyleBackColor = true;
+            // 
+            // mockedAddRowButton
+            // 
+            this.mockedAddRowButton.Location = new System.Drawing.Point(12, 48);
+            this.mockedAddRowButton.Name = "mockedAddRowButton";
+            this.mockedAddRowButton.Size = new System.Drawing.Size(88, 23);
+            this.mockedAddRowButton.TabIndex = 6;
+            this.mockedAddRowButton.Text = "Add row mock";
+            this.mockedAddRowButton.UseVisualStyleBackColor = true;
+            this.mockedAddRowButton.Click += new System.EventHandler(this.mockedAddRowButton_Click);
             // 
             // label1
             // 
@@ -260,16 +280,6 @@
             this.membersGrid.Name = "membersGrid";
             this.membersGrid.Size = new System.Drawing.Size(800, 351);
             this.membersGrid.TabIndex = 2;
-            // 
-            // mockedAddRowButton
-            // 
-            this.mockedAddRowButton.Location = new System.Drawing.Point(12, 48);
-            this.mockedAddRowButton.Name = "mockedAddRowButton";
-            this.mockedAddRowButton.Size = new System.Drawing.Size(88, 23);
-            this.mockedAddRowButton.TabIndex = 6;
-            this.mockedAddRowButton.Text = "Add row mock";
-            this.mockedAddRowButton.UseVisualStyleBackColor = true;
-            this.mockedAddRowButton.Click += new System.EventHandler(this.mockedAddRowButton_Click);
             // 
             // IdColumn
             // 
@@ -329,15 +339,6 @@
             this.PINColumn.HeaderText = "Column1";
             this.PINColumn.Name = "PINColumn";
             // 
-            // DeletedButton
-            // 
-            this.DeletedButton.Location = new System.Drawing.Point(158, 6);
-            this.DeletedButton.Name = "DeletedButton";
-            this.DeletedButton.Size = new System.Drawing.Size(140, 23);
-            this.DeletedButton.TabIndex = 7;
-            this.DeletedButton.Text = "Get Deleted";
-            this.DeletedButton.UseVisualStyleBackColor = true;
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -346,9 +347,10 @@
             this.Controls.Add(this.membersGrid);
             this.Controls.Add(this.bindingNavigator1);
             this.Controls.Add(this.panel1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Form1";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Form1";
+            this.Text = "Get changes code sample";
             ((System.ComponentModel.ISupportInitialize)(this.bindingNavigator1)).EndInit();
             this.bindingNavigator1.ResumeLayout(false);
             this.bindingNavigator1.PerformLayout();

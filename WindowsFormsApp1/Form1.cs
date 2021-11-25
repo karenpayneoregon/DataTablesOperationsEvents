@@ -8,15 +8,16 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using BaseLibrary;
-using static BaseLibrary.KarenDialogs;
+using WindowsFormsApp1.Classes;
+using static BaseLibrary.Dialogs;
 
 namespace WindowsFormsApp1
 {
     public partial class Form1 : Form
     {
-        private DataOperations _operations = new DataOperations();
+        private readonly DataOperations _operations = new DataOperations();
         private BindingSource _bindingSource;
-        private DataTableEvents _dataTableEvents = new DataTableEvents();
+        private readonly DataTableEvents _dataTableEvents = new DataTableEvents();
         public Form1()
         {
             InitializeComponent();
@@ -26,7 +27,7 @@ namespace WindowsFormsApp1
         private void Form1_Shown(object sender, EventArgs e)
         {
             membersGrid.AutoGenerateColumns = false;
-            Height = 610;
+            Height = 400;
             Width = 580;
 
             var dtMember = _operations.LoadMembers();
@@ -83,6 +84,7 @@ namespace WindowsFormsApp1
                 MessageBox.Show(_operations.LastExceptionMessage);
             }
         }
+
         private void MembersGrid_CellValidating(object sender, DataGridViewCellValidatingEventArgs e)
         {
             var cell = membersGrid[e.ColumnIndex, e.RowIndex];
@@ -119,7 +121,7 @@ namespace WindowsFormsApp1
 
         private void closeButton_Click(object sender, EventArgs e)
         {
-            
+            Close();
         }
 
         private void toolStripButtonSave_Click(object sender, EventArgs e)
@@ -156,6 +158,7 @@ namespace WindowsFormsApp1
                     }
                 }
             }
+
             if (results.HasModified)
             {
                 foreach (DataRow row in results.Modified.Rows)
@@ -176,6 +179,7 @@ namespace WindowsFormsApp1
 
             }
         }
+
         private void getChangesButton_Click(object sender, EventArgs e)
         {
             var originalTable = _bindingSource.DataTable();
@@ -199,8 +203,6 @@ namespace WindowsFormsApp1
             {
                 _operations.UpdateRows(results.Modified);
             }
-
-            //_bindingSource.DataTable().AcceptChanges();
         }
 
         private void mockedAddRowButton_Click(object sender, EventArgs e)
@@ -210,6 +212,7 @@ namespace WindowsFormsApp1
             _bindingSource.DataTable().Rows.Add(null, null, "Karen","Payne","111 Apple Lane","Salem", "OR", "98888", "5555");
             _bindingSource.MoveLast();
         }
+
         /// <summary>
         /// By default a BindingNavigator action buttons perform actions for us,
         /// in this case Item under BindingNavigator properties, DeleteIem is set
@@ -222,7 +225,7 @@ namespace WindowsFormsApp1
         {
             if (Question("Remove current member"))
             {
-                _bindingSource.RemoveCurrent();
+                _bindingSource.DataRow().Delete();
             }
         }
     }

@@ -28,7 +28,7 @@ namespace BaseLibrary
         /// <param name="e"></param>
         public void ColumnChanged(object sender, DataColumnChangeEventArgs e)
         {
-            if (e.Row.RowState == DataRowState.Deleted || e.Row.RowState == DataRowState.Detached) return;
+            if (e.Row.RowState == DataRowState.Deleted || e.Row.RowState == DataRowState.Detached || e.Row.RowState == DataRowState.Added) return;
 
             if (e.Row.Table.Columns.Contains("id"))
             {

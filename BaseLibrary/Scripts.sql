@@ -1,4 +1,10 @@
-﻿TRUNCATE TABLE dbo.Member
+﻿/*
+	1. Create new database TechNetData
+	2. Run second script to create tables and populate
+*/
+
+--- used to reset to original state
+TRUNCATE TABLE dbo.Member
 SET IDENTITY_INSERT [dbo].[Member] ON 
 
 INSERT [dbo].[Member] ([Id], [FirstName], [LastName], [Street], [City], [State], [PostalCode], [PIN], [Status]) VALUES (1, N'Stefanie', N'Buckley', N'36 West Fabien St.', N'Lincoln', N'KY', N'59898', N'4517', 0)

@@ -51,7 +51,7 @@
     <Compile Include="DataOperations.cs" />
     <Compile Include="DataTableEvents.cs" />
     <Compile Include="ExtensionMethods.cs" />
-    <Compile Include="KarenDialogs.cs" />
+    <Compile Include="Dialogs.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TableChanges.cs" />
   </ItemGroup>

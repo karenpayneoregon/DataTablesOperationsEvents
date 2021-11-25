@@ -1,35 +1,33 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Data;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace BaseLibrary
 {
     public static class ExtensionMethods
     {
-        public static TableChanges AllChanges(this DataTable sender, int primaryKeyIndex)
+        public static TableChanges AllChanges(this DataTable dataTable, int primaryKeyIndex)
         {
-            var results = new TableChanges {Deleted = sender.GetChanges(DataRowState.Deleted)};
+            var results = new TableChanges {Deleted = dataTable.GetChanges(DataRowState.Deleted)};
 
             results.HasDeleted = results.Deleted != null;
 
-            for (var index = 0; index < sender.Rows.Count; index++)
+            for (var index = 0; index < dataTable.Rows.Count; index++)
             {
-                if (sender.Rows[index].RowState == DataRowState.Deleted)
+                if (dataTable.Rows[index].RowState == DataRowState.Deleted)
                 {
-                    results.DeletedPrimaryKeys.Add(Convert.ToInt32(sender.Rows[index][primaryKeyIndex, DataRowVersion.Original]));
+                    results.DeletedPrimaryKeys.Add(Convert.ToInt32(dataTable.Rows[index][primaryKeyIndex, 
+                        DataRowVersion.Original]));
                 }
             }
 
-            results.Modified = sender.GetChanges(DataRowState.Modified);
+            results.Modified = dataTable.GetChanges(DataRowState.Modified);
             results.HasModified = results.Modified != null;
 
-            results.Added = sender.GetChanges(DataRowState.Added);
+            results.Added = dataTable.GetChanges(DataRowState.Added);
             results.HasNew = results.Added != null;
 
-            results.UnChanged = sender.GetChanges(DataRowState.Unchanged);
+            results.UnChanged = dataTable.GetChanges(DataRowState.Unchanged);
             results.HasUnchanged = results.UnChanged != null;
 
             results.Any = results.HasDeleted || results.HasModified || results.HasNew;
@@ -40,14 +38,14 @@ namespace BaseLibrary
         /// <summary> 
         /// Get changes by primary name 
         /// </summary> 
-        /// <param name="sender"></param> 
+        /// <param name="dataTable"></param> 
         /// <param name="primaryKeyColumnName"></param> 
         /// <returns></returns> 
-        public static TableChanges AllChanges(this DataTable sender, string primaryKeyColumnName = "id")
+        public static TableChanges AllChanges(this DataTable dataTable, string primaryKeyColumnName = "id")
         {
 
-            int primaryKeyIndex = sender.Columns[primaryKeyColumnName].Ordinal;
-            var results = sender.AllChanges(primaryKeyIndex);
+            int primaryKeyIndex = dataTable.Columns[primaryKeyColumnName].Ordinal;
+            var results = dataTable.AllChanges(primaryKeyIndex);
 
             return results;
 
@@ -56,12 +54,13 @@ namespace BaseLibrary
         /// Returns a comma delimited string representing all  
         /// data rows in the table. 
         /// </summary> 
-        /// <param name="sender"></param> 
+        /// <param name="dataTable"></param> 
         /// <returns></returns> 
-        public static string Flatten(this DataTable sender)
+        public static string Flatten(this DataTable dataTable)
         {
             var sb = new StringBuilder();
-            foreach (DataRow row in sender.Rows)
+
+            foreach (DataRow row in dataTable.Rows)
             {
                 sb.AppendLine(string.Join(",", row.ItemArray));
             }

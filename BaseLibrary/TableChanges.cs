@@ -21,14 +21,8 @@ namespace BaseLibrary
         private List<int> _deletedPrimaryKeys = new List<int>();
         public List<int> DeletedPrimaryKeys
         {
-            get
-            {
-                return _deletedPrimaryKeys;
-            }
-            set
-            {
-                _deletedPrimaryKeys = value;
-            }
+            get => _deletedPrimaryKeys;
+            set => _deletedPrimaryKeys = value;
         }
         /// <summary> 
         /// Indicates the DataTable has one ore more modified rows 
